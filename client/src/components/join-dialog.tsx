@@ -1,10 +1,5 @@
 import React from "react";
-import { AnimatePresence, motion } from "framer-motion";import { createRoot } from "react-dom/client";
-import App from "./App";
-import "./index.css";
-
-createRoot(document.getElementById("root")!).render(<App />);
-
+import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { useLocation } from "wouter";
 // Using the explicitly requested background image
