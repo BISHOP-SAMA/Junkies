@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { useLocation } from "wouter";
 // Using the explicitly requested background image
-import popupBg from "@assets/0c241c1d8837547859bbae6f7f69f8d0_1772624757874.jpg";
+import popupBg from "@assets/0c241c1d8837547859bbae6f7f69f8d0.jpg";
 
 interface JoinDialogProps {
   isOpen: boolean;
