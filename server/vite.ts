@@ -5,8 +5,39 @@ import viteConfig from "../vite.config";
 import fs from "fs";
 import path from "path";
 import { nanoid } from "nanoid";
+import express from "express";
 
 const viteLogger = createLogger();
+
+export function log(message: string, source = "express") {
+  const formattedTime = new Date().toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+  });
+  console.log(`${formattedTime} [${source}] ${message}`);
+}
+
+export function serveStatic(app: Express) {
+  const distPath = path.resolve(process.cwd(), "client", "dist");
+
+  if (!fs.existsSync(distPath)) {
+    console.warn(`Warning: client/dist not found at ${distPath}`);
+  }
+
+  app.use(express.static(distPath));
+
+  // Fallback: serve index.html for all non-API routes (SPA routing)
+  app.use("/{*path}", (req, res) => {
+    const indexPath = path.resolve(distPath, "index.html");
+    if (fs.existsSync(indexPath)) {
+      res.sendFile(indexPath);
+    } else {
+      res.status(404).send("Not found");
+    }
+  });
+}
 
 export async function setupVite(server: Server, app: Express) {
   const serverOptions = {
@@ -42,7 +73,6 @@ export async function setupVite(server: Server, app: Express) {
         "index.html",
       );
 
-      // always reload the index.html file from disk incase it changes
       let template = await fs.promises.readFile(clientTemplate, "utf-8");
       template = template.replace(
         `src="/src/main.tsx"`,
