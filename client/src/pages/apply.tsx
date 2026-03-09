@@ -42,7 +42,6 @@ export default function Apply() {
       triggerConfetti();
       setIsSuccess(true);
     } catch (error) {
-      // Error handled by mutation and globally usually, but we could add local error state if needed
       console.error(error);
     }
   };
@@ -114,7 +113,14 @@ export default function Apply() {
                   </li>
                   <li className="flex items-center gap-3 bg-white/40 p-3 rounded-xl">
                     <div className="h-6 w-6 rounded-full border-2 border-secondary-foreground flex-shrink-0" />
-                    Like and Retweet Junkies
+                    <a 
+                      href="https://x.com/junkyardonETH/status/2031083248898461727" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="underline hover:opacity-70"
+                    >
+                      Like and Retweet Junkies
+                    </a>
                   </li>
                   <li className="flex items-center gap-3 bg-white/40 p-3 rounded-xl">
                     <div className="h-6 w-6 rounded-full border-2 border-secondary-foreground flex-shrink-0" />
